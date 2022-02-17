@@ -1,0 +1,35 @@
+@import "../style/mixins.scss";
+
+.page-container {
+  .snippets-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .snippets {
+    width: 100%;
+  }
+
+  .tags-selector {
+    @include card();
+    margin: 3rem 0;
+    padding-bottom: 1.5rem;
+    background: #fff;
+    min-width: 130px;
+    height: 100%;
+
+    li {
+      text-decoration: none;
+
+      &:hover {
+        color: var(--text-dark-color);
+      }
+    }
+
+    hr {
+      margin: 0.8rem 0;
+    }
+  }
+}
