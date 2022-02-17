@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import server from "../util/server";
+import server from "../../util/server";
 import "./AuthForm.scss";
 
 function Login() {

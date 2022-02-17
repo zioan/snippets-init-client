@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import server from "../util/server";
+import server from "../../util/server";
+import UserContext from "../../util/UserContext";
 
 import "./AuthForm.scss";
 
@@ -10,6 +11,8 @@ function Register() {
   const [formEmail, setFormEmail] = useState("");
   const [formPassword, setFormPassword] = useState("");
   const [formPasswordVerify, setFormPasswordVerify] = useState("");
+
+  const { getUser } = useContext(UserContext);
 
   const history = useHistory();
 
@@ -30,6 +33,11 @@ function Register() {
       return;
     }
 
+    const initializeTags = {
+      title: "Select tag...",
+    };
+    await getUser();
+    await axios.post(`${server}/api/snippetTags`, initializeTags);
     history.push("/snippets");
   }
 

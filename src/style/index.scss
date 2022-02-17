@@ -35,6 +35,14 @@ a {
   @include lnk();
 }
 
+li {
+  list-style: none;
+  color: unset;
+  text-decoration: unset;
+  cursor: pointer;
+  @include lnk();
+}
+
 input,
 textarea {
   color: unset;
