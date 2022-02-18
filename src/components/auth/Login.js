@@ -1,8 +1,11 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import server from "../../util/server";
 import "./AuthForm.scss";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const [formEmail, setFormEmail] = useState("JohnDoe@gmail.com");
@@ -10,8 +13,34 @@ function Login() {
 
   const history = useHistory();
 
+  // Notifications
+  const defaultParams = {
+    position: "bottom-right",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: false,
+    pauseOnClick: false,
+    draggable: true,
+    progress: undefined,
+  };
+  const emptyEmailErrorMessage = () =>
+    toast("You can't log in without your Email!", defaultParams);
+  const emptyPasswordErrorMessage = () =>
+    toast("You can't log in without your Password!", defaultParams);
+  const wrongCredentialErrorMessage = () =>
+    toast("Email or Password invalid!", defaultParams);
+
   async function login(e) {
     e.preventDefault();
+
+    if (formEmail === "") {
+      emptyEmailErrorMessage();
+      return;
+    } else if (formPassword === "") {
+      emptyPasswordErrorMessage();
+      return;
+    }
 
     const loginData = {
       email: formEmail,
@@ -21,7 +50,7 @@ function Login() {
     try {
       await axios.post(`${server}/api/users/login`, loginData);
     } catch (err) {
-      console.log(err);
+      wrongCredentialErrorMessage();
       return;
     }
 
@@ -35,13 +64,14 @@ function Login() {
 
   return (
     <div className="auth-form">
+      <ToastContainer />
       <div className="form-container">
         <div className="divider">
           <p>
             <span className="action">Log in</span>
           </p>
         </div>
-        <form className="form" onSubmit={login}>
+        <form onSubmit={login}>
           <label htmlFor="form-email">Email</label>
           <input
             id="form-email"

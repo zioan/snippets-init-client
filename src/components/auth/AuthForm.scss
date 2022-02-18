@@ -1,6 +1,14 @@
 @import "../../style/mixins.scss";
 
 .auth-form {
+  box-shadow: var(--box-shadow-light);
+  background-color: var(--light-color);
+  border-radius: 10px;
+  padding: 1.5rem;
+
+  form {
+    max-width: 600px;
+  }
   .btn-submit {
     @include btn();
     background: var(--primary-color);
@@ -10,7 +18,7 @@
   }
 
   .form-container {
-    padding: 1.5rem 0;
+    padding-top: 1.5rem;
   }
 
   .divider p {
@@ -18,7 +26,7 @@
     text-align: center;
     border-bottom: 1px solid var(--primary-color);
     line-height: 0.1em;
-    margin: 2rem 0 2rem;
+    margin: 0 0 2rem;
   }
 
   .divider p span {

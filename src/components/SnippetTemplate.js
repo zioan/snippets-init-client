@@ -3,7 +3,10 @@ import CodeEditor from "@uiw/react-textarea-code-editor";
 import axios from "axios";
 import server from "../util/server";
 import "./SnippetTemplate.scss";
-import SnippetTag from "./SnippetTag";
+import TagSelector from "./TagSelector";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SnippetTemplate({ snippet, getSnippets }) {
   const [updateSnippet, setUpdateSnippet] = useState(false);
@@ -15,8 +18,31 @@ function SnippetTemplate({ snippet, getSnippets }) {
   const [editorCode, setEditorCode] = useState(snippet.code);
   const [editorTag, setEditorTag] = useState(snippet.tag);
 
+  // Notifications
+  const defaultParams = {
+    position: "bottom-right",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: false,
+    pauseOnClick: false,
+    draggable: true,
+    progress: undefined,
+  };
+  const snippetSavedMessage = () => toast("Snippet saved!", defaultParams);
+  const copyToClipboardMessage = () =>
+    toast("Copied to clipboard!", defaultParams);
+  const deleteSnippetMessage = () => toast("Snippet deleted!", defaultParams);
+  const snippetSavedErrorMessage = () =>
+    toast("Title and Code cannot be empty!", defaultParams);
+
   async function saveSnippet(e) {
     e.preventDefault();
+
+    if (editorTitle === "" || editorCode === "") {
+      snippetSavedErrorMessage();
+      return;
+    }
 
     const snippetData = {
       title: editorTitle,
@@ -36,7 +62,10 @@ function SnippetTemplate({ snippet, getSnippets }) {
 
     getSnippets();
     closeEditor();
+    snippetSavedMessage();
   }
+
+  const saveToClipboard = () => navigator.clipboard.writeText(snippet.code);
 
   function selectedUserTag(selectedTag) {
     setEditorTag(selectedTag);
@@ -51,7 +80,9 @@ function SnippetTemplate({ snippet, getSnippets }) {
   async function deleteSnippet() {
     if (window.confirm("Do you want to delete this snippet?")) {
       await axios.delete(`${server}/api/snippets/${snippet._id}`);
+
       getSnippets();
+      deleteSnippetMessage();
     }
   }
 
@@ -62,11 +93,12 @@ function SnippetTemplate({ snippet, getSnippets }) {
 
   return (
     <div className="snippet">
+      <ToastContainer />
       {/* Snippet editing Mode. Rendering section is disabled */}
       {updateSnippet && (
         <>
           <h2 className="edit-title">Editing {snippet.title}</h2>
-          <SnippetTag selectedUserTag={selectedUserTag} />
+          <TagSelector selectedUserTag={selectedUserTag} />
 
           <form className="form" onSubmit={saveSnippet}>
             <label htmlFor="editor-title">Title</label>
@@ -120,7 +152,8 @@ function SnippetTemplate({ snippet, getSnippets }) {
               <button
                 className="btn-copy"
                 onClick={() => {
-                  navigator.clipboard.writeText(snippet.code);
+                  saveToClipboard();
+                  copyToClipboardMessage();
                 }}
               >
                 Copy
@@ -145,7 +178,8 @@ function SnippetTemplate({ snippet, getSnippets }) {
           <button
             className="btn-copy"
             onClick={() => {
-              navigator.clipboard.writeText(snippet.code);
+              saveToClipboard();
+              copyToClipboardMessage();
             }}
           >
             Copy

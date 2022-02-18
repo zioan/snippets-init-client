@@ -2,6 +2,8 @@
 
 .snippet-editor {
   @include card();
+  margin: auto;
+  max-width: 1200px;
 
   .code {
     margin-bottom: 1rem;
@@ -22,4 +24,11 @@
     background: var(--danger-color);
     color: var(--text-light-color);
   }
+}
+
+.btn-new {
+  @include btn();
+  margin-right: 1rem;
+  background: var(--primary-color);
+  color: var(--text-light-color);
 }

@@ -1,0 +1,14 @@
+@import "../style/mixins.scss";
+
+.tag-editor {
+  select {
+    width: 200px;
+
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: none;
+    background: var(--dark-color);
+    color: var(--text-dark-color);
+  }
+}

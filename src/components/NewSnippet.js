@@ -3,7 +3,10 @@ import axios from "axios";
 import "./NewSnippet.scss";
 import CodeEditor from "@uiw/react-textarea-code-editor";
 import server from "../util/server";
-import SnippetTag from "./SnippetTag";
+import SnippetTag from "./TagSelector";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function NewSnippet({ getSnippets }) {
   const [editorToggler, setEditorToggler] = useState(false);
@@ -12,8 +15,28 @@ function NewSnippet({ getSnippets }) {
   const [editorCode, setEditorCode] = useState("");
   const [editorTag, setEditorTag] = useState("no tag");
 
+  // Notifications
+  const defaultParams = {
+    position: "bottom-right",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: false,
+    pauseOnClick: false,
+    draggable: true,
+    progress: undefined,
+  };
+  const snippetSavedMessage = () => toast("Snippet saved!", defaultParams);
+  const snippetSavedErrorMessage = () =>
+    toast("Title and Code cannot be empty!", defaultParams);
+
   async function saveSnippet(e) {
     e.preventDefault();
+
+    if (editorTitle === "" || editorCode === "") {
+      snippetSavedErrorMessage();
+      return;
+    }
 
     const snippetData = {
       title: editorTitle,
@@ -33,6 +56,7 @@ function NewSnippet({ getSnippets }) {
 
     getSnippets();
     closeEditor();
+    snippetSavedMessage();
   }
 
   function selectedUserTag(selectedTag) {
@@ -50,12 +74,17 @@ function NewSnippet({ getSnippets }) {
   return (
     <div>
       {!editorToggler && (
-        <button onClick={() => setEditorToggler(!editorToggler)}>
-          Add Snippet
+        <button
+          className="btn-new"
+          onClick={() => setEditorToggler(!editorToggler)}
+        >
+          Add New Snippet
         </button>
       )}
       {editorToggler && (
         <div className="snippet-editor">
+          <ToastContainer />
+
           <SnippetTag selectedUserTag={selectedUserTag} />
           <form className="form" onSubmit={saveSnippet}>
             <label htmlFor="editor-title">Title</label>

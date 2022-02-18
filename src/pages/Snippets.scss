@@ -1,27 +1,90 @@
 @import "../style/mixins.scss";
 
 .page-container {
+  width: 100%;
+  @include card;
+
+  .content {
+    @include card;
+    max-width: 1200px;
+    margin: auto;
+
+    span {
+      font-weight: bold;
+    }
+
+    .search-bar {
+      input {
+        padding: 1rem 1.5rem;
+        font-weight: bold;
+      }
+
+      input:focus {
+        outline: none;
+      }
+    }
+
+    .openModalBtn,
+    .clear-search {
+      @include lnk();
+      margin-bottom: 1rem;
+      margin-right: 1rem;
+    }
+
+    .search-buttons {
+      margin: 2rem 0 1rem;
+      button {
+        @include lnk();
+        margin: 0 0.5rem;
+      }
+      p {
+        display: inline-block;
+        font-weight: bold;
+      }
+    }
+  }
+
   .snippets-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
+    // display: flex;
+    // justify-content: space-between;
+    // gap: 2rem;
     margin-top: 2rem;
   }
 
+  .no-snippets {
+    color: var(--text-dark-color);
+    font-weight: bold;
+    margin-top: 1rem;
+  }
+
+  .divider {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .snippets {
-    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
   }
 
   .tags-selector {
     @include card();
-    margin: 3rem 0;
+    // margin: 3rem 0;
     padding-bottom: 1.5rem;
-    background: #fff;
-    min-width: 130px;
+    background: var(--light-color);
+    min-width: 200px;
+    max-width: 200px;
     height: 100%;
+    text-align: center;
+
+    p {
+      font-weight: bold;
+    }
 
     li {
       text-decoration: none;
+      width: 100%;
 
       &:hover {
         color: var(--text-dark-color);
@@ -30,6 +93,25 @@
 
     hr {
       margin: 0.8rem 0;
+    }
+  }
+
+  .tags-editor {
+    padding: 2rem;
+
+    .tag {
+      @include btn();
+      background: var(--dark-color);
+      margin: 1rem 0.3rem;
+    }
+
+    .add-tag,
+    .remove-tags {
+      @include card();
+    }
+
+    .add-tag {
+      margin-bottom: 2rem;
     }
   }
 }

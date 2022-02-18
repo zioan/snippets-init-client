@@ -1,7 +1,7 @@
 @import "../style/mixins.scss";
 
 .tag-editor {
-  margin: 1rem 0;
+  margin-top: 1rem;
 
   .form {
     input {
@@ -9,17 +9,6 @@
       display: inline-block;
       margin-right: 1rem;
     }
-  }
-
-  select {
-    width: 200px;
-
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    border: none;
-    background: var(--dark-color);
-    color: var(--text-dark-color);
   }
 
   button {

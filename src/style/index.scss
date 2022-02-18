@@ -17,7 +17,9 @@ body {
 .container {
   margin: 0 auto;
   padding: 1rem;
-  max-width: 1200px;
+  max-width: 90vw;
+  min-height: 100vh;
+  // max-width: 1200px;
 }
 
 //reset
@@ -164,4 +166,26 @@ textarea {
       color: #6f42c1;
     }
   }
+}
+
+// tostify
+
+.Toastify__toast {
+  //toast container
+  background: rgb(171, 255, 61);
+  // background: var(--danger-light-color);
+  border-radius: 10px;
+  box-shadow: (--box-shadow);
+}
+
+.Toastify__toast-body {
+  //toast inner container
+  color: var(--text-dark-color);
+  font-weight: bold;
+  background: rgb(171, 255, 61);
+}
+
+.Toastify__toast > button > svg {
+  //close x button
+  display: none;
 }

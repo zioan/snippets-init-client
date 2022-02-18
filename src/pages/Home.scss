@@ -1,37 +1,100 @@
-.home {
-  display: flex;
-  gap: 5rem;
-  justify-content: space-between;
+@import "../style/mixins.scss";
 
-  .intro {
-    max-width: 100%;
+.home-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: calc((100vh - 600px) / 2);
+
+  .form-action {
+    margin-top: -85px;
+    margin-bottom: 100px;
+    padding-right: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    .form-toggler {
+      font-weight: bold;
+      color: var(--light-color);
+
+      button {
+        font-size: 1.2rem;
+        margin-left: 0.5rem;
+        padding: 0.5rem;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 
-  .code-img {
-    width: 100%;
-    max-width: 960px;
-    height: auto;
-    margin: 3rem 0 1.5rem 0;
-  }
+  .home {
+    display: flex;
+    gap: 5rem;
+    justify-content: space-between;
 
-  .user-forms {
-    padding: 1.5rem 2rem;
-    padding-bottom: 2.2rem;
-    background: var(--light-color);
-    width: 500px;
-    border-radius: 10px;
+    .intro {
+      margin-top: 2rem;
+      color: var(--text-light-color);
+
+      .dropcaps::first-letter {
+        font-size: 3rem;
+        float: left;
+        margin-top: -10px;
+        margin-right: 12px;
+      }
+
+      p {
+        font-size: 1.3rem;
+      }
+    }
+
+    .code-img {
+      width: 100%;
+      max-width: 960px;
+      height: auto;
+      margin: 3rem 0 1.5rem 0;
+    }
+
+    .user-forms {
+      padding: 2rem;
+      background: transparent;
+      max-width: 700px;
+      border-radius: 10px;
+    }
   }
 }
 
 @media screen and (max-width: 960px) {
-  .home {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+  .home-page {
+    margin-top: 60px;
+    .home {
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
   }
 
-  .user-forms {
-    margin: 1rem;
-    max-width: 400px;
+  .content-center {
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .home-page {
+    margin-top: 5rem;
+    .form-action {
+      margin-top: -30px;
+      margin-bottom: 50px;
+    }
+
+    .home {
+      .intro {
+        margin-top: 0;
+      }
+    }
+
+    .code-img {
+      display: none;
+    }
   }
 }

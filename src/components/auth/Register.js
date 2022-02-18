@@ -3,8 +3,10 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import server from "../../util/server";
 import UserContext from "../../util/UserContext";
-
 import "./AuthForm.scss";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Register() {
   const [formName, setFormName] = useState("");
@@ -13,23 +15,66 @@ function Register() {
   const [formPasswordVerify, setFormPasswordVerify] = useState("");
 
   const { getUser } = useContext(UserContext);
-
   const history = useHistory();
+
+  // Notifications
+  const defaultParams = {
+    position: "bottom-right",
+    autoClose: 3000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: false,
+    pauseOnClick: false,
+    draggable: true,
+    progress: undefined,
+  };
+  const emptyNameErrorMessage = () =>
+    toast("Please enter your name!", defaultParams);
+  const emptyEmailErrorMessage = () =>
+    toast("Please enter your email!", defaultParams);
+  const emptyPasswordErrorMessage = () =>
+    toast("Please enter a password", defaultParams);
+  const emptyPasswordVerifyErrorMessage = () =>
+    toast("Please retype your password", defaultParams);
+  const passwordVerificationErrorMessage = () =>
+    toast("Wrong password verification", defaultParams);
+  const existingUserErrorMessage = () =>
+    toast("An account with this email already exists!", defaultParams);
 
   async function register(e) {
     e.preventDefault();
+
+    if (formName === "") {
+      emptyNameErrorMessage();
+      return;
+    }
+    if (formEmail === "") {
+      emptyEmailErrorMessage();
+      return;
+    }
+    if (formPassword === "") {
+      emptyPasswordErrorMessage();
+      return;
+    }
+    if (formPasswordVerify === "") {
+      emptyPasswordVerifyErrorMessage();
+      return;
+    }
+    if (formPassword !== formPasswordVerify) {
+      passwordVerificationErrorMessage();
+      return;
+    }
 
     const registerData = {
       name: formName,
       email: formEmail,
       password: formPassword,
-      // passwordVerify: formPasswordVerify,
     };
 
     try {
       await axios.post(`${server}/api/users/register`, registerData);
     } catch (err) {
-      console.log(err);
+      existingUserErrorMessage();
       return;
     }
 
@@ -43,13 +88,14 @@ function Register() {
 
   return (
     <div className="auth-form">
+      <ToastContainer />
       <div className="form-container">
         <div className="divider">
           <p>
             <span className="action">Register</span>
           </p>
         </div>
-        <form className="form" onSubmit={register}>
+        <form onSubmit={register}>
           <label htmlFor="form-name">Name</label>
           <input
             id="form-name"
@@ -71,13 +117,13 @@ function Register() {
             value={formPassword}
             onChange={(e) => setFormPassword(e.target.value)}
           />
-          {/* <label htmlFor="form-passwordVerify">Confirm password</label>
+          <label htmlFor="form-passwordVerify">Confirm password</label>
           <input
             id="form-passwordVerify"
             type="password"
             value={formPasswordVerify}
             onChange={(e) => setFormPasswordVerify(e.target.value)}
-          /> */}
+          />
 
           <button className="btn-submit" type="submit">
             Register
