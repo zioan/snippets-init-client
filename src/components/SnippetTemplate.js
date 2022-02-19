@@ -68,12 +68,16 @@ function SnippetTemplate({ snippet, getSnippets }) {
   const saveToClipboard = () => navigator.clipboard.writeText(snippet.code);
 
   function selectedUserTag(selectedTag) {
-    setEditorTag(selectedTag);
+    setEditorTag(selectedTag !== "No tag" ? selectedTag : snippet.tag);
   }
 
   function closeEditor() {
     setUpdateSnippet(false);
     setShowSnippet(true);
+    setEditorTitle(snippet.title);
+    setEditorDescription(snippet.description);
+    setEditorCode(snippet.code);
+    setEditorTag(snippet.tag);
     getSnippets();
   }
 
@@ -97,10 +101,14 @@ function SnippetTemplate({ snippet, getSnippets }) {
       {/* Snippet editing Mode. Rendering section is disabled */}
       {updateSnippet && (
         <>
-          <h2 className="edit-title">Editing {snippet.title}</h2>
+          <h2 className="edit-title">Editing - {snippet.title}</h2>
           <TagSelector selectedUserTag={selectedUserTag} />
 
           <form className="form" onSubmit={saveSnippet}>
+            <button className="btn-save" type="submit">
+              Save snippet
+            </button>
+            <label>Snippet tag: {editorTag}</label>
             <label htmlFor="editor-title">Title</label>
             <input
               id="editor-title"
@@ -131,7 +139,7 @@ function SnippetTemplate({ snippet, getSnippets }) {
               />
             </div>
             <button className="btn-save" type="submit">
-              Save
+              Save snippet
             </button>
             <button className="btn-cancel" type="button" onClick={closeEditor}>
               Cancel
@@ -146,7 +154,7 @@ function SnippetTemplate({ snippet, getSnippets }) {
           {" "}
           <div className="snippet-header">
             <h2 className="title">{snippet.title}</h2>
-            <div>
+            <div className="group">
               {snippet.tag && <span className="tag">{snippet.tag}</span>}
 
               <button
@@ -165,6 +173,7 @@ function SnippetTemplate({ snippet, getSnippets }) {
           <div className="code">
             <CodeEditor
               className="code-editor"
+              disabled={true}
               value={snippet.code}
               language="js"
               placeholder="Please enter your code."

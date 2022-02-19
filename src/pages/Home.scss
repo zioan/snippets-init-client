@@ -3,7 +3,6 @@
 .home-page {
   max-width: 1200px;
   margin: 0 auto;
-  margin-top: calc((100vh - 600px) / 2);
 
   .form-action {
     margin-top: -85px;
@@ -31,6 +30,7 @@
     display: flex;
     gap: 5rem;
     justify-content: space-between;
+    // margin-top: calc((100vh - 600px) / 2);
 
     .intro {
       margin-top: 2rem;
@@ -46,13 +46,19 @@
       p {
         font-size: 1.3rem;
       }
+
+      button {
+        text-decoration: underline;
+        font-weight: bold;
+      }
     }
 
     .code-img {
       width: 100%;
       max-width: 960px;
       height: auto;
-      margin: 3rem 0 1.5rem 0;
+      margin-bottom: 2rem;
+      box-shadow: var(--box-shadow);
     }
 
     .user-forms {
@@ -68,7 +74,8 @@
   .home-page {
     margin-top: 60px;
     .home {
-      flex-direction: column;
+      margin-top: 0;
+      flex-direction: column-reverse;
       align-items: center;
       gap: 0;
     }

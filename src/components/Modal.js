@@ -14,7 +14,9 @@ function Modal(props) {
             X
           </button>
         </div>
-        <div className="title"></div>
+        <div className="title">
+          <h2>{props.title}</h2>
+        </div>
         <div className="body">{props.children}</div>
         <button
           className="btn-close"

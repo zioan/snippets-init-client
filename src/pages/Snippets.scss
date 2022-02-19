@@ -8,14 +8,20 @@
     @include card;
     max-width: 1200px;
     margin: auto;
+    display: flex;
+    gap: 2rem;
+    // justify-content: space-between;
 
     span {
       font-weight: bold;
     }
 
     .search-bar {
+      width: 100%;
+      margin: auto;
       input {
         padding: 1rem 1.5rem;
+        font-size: 0.9rem;
         font-weight: bold;
       }
 
@@ -29,25 +35,26 @@
       @include lnk();
       margin-bottom: 1rem;
       margin-right: 1rem;
+      // margin-top: 1rem;
+      display: block;
     }
 
     .search-buttons {
       margin: 2rem 0 1rem;
+      display: flex;
+      justify-content: space-between;
       button {
         @include lnk();
-        margin: 0 0.5rem;
-      }
-      p {
-        display: inline-block;
-        font-weight: bold;
+        margin-left: 1rem;
+        margin-bottom: 1rem;
       }
     }
   }
 
   .snippets-container {
-    // display: flex;
-    // justify-content: space-between;
-    // gap: 2rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
     margin-top: 2rem;
   }
 
@@ -57,21 +64,14 @@
     margin-top: 1rem;
   }
 
-  .divider {
-    display: flex;
-    justify-content: space-between;
-  }
-
   .snippets {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    width: 100%;
   }
 
   .tags-selector {
     @include card();
     // margin: 3rem 0;
-    padding-bottom: 1.5rem;
+    padding-bottom: 2.5rem;
     background: var(--light-color);
     min-width: 200px;
     max-width: 200px;
@@ -80,11 +80,11 @@
 
     p {
       font-weight: bold;
+      margin-bottom: 1rem;
     }
 
     li {
       text-decoration: none;
-      width: 100%;
 
       &:hover {
         color: var(--text-dark-color);
@@ -112,6 +112,53 @@
 
     .add-tag {
       margin-bottom: 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .page-container {
+    margin-top: 60px;
+
+    .snippets-container {
+      flex-direction: column-reverse;
+    }
+
+    .tags-selector {
+      max-width: 100%;
+
+      ul {
+        .separator {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1rem;
+        }
+
+        hr {
+          display: none;
+        }
+        li {
+          line-height: 0.5;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .page-container {
+    .content {
+      .clear-search {
+        display: none;
+      }
+      .openModalBtn {
+        margin-top: 2rem;
+        float: right;
+      }
+      .search-buttons {
+        display: inline-block;
+        margin-top: 0;
+      }
     }
   }
 }

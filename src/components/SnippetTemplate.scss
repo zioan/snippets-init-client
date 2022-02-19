@@ -1,8 +1,8 @@
 @import "../style/mixins.scss";
 
 .snippet {
-  margin: 1.5rem 0 3rem 0;
-  max-width: 800px;
+  margin-bottom: 2rem;
+  max-width: 1200px;
   @include card();
 
   .edit-title {
@@ -15,11 +15,20 @@
   .description,
   .code {
     margin-bottom: 1rem;
+    max-height: 500px;
+    overflow: auto;
   }
 
-  .tag {
-    margin-right: 2rem;
-    font-weight: bold;
+  .group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    width: auto;
+    .tag {
+      font-weight: bold;
+    }
   }
 
   .divider {
@@ -42,6 +51,7 @@
   .btn-cancel {
     @include btn();
     margin-right: 1rem;
+    margin-bottom: 0.5rem;
     color: var(--text-light-color);
   }
 

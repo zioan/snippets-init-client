@@ -3,10 +3,13 @@
 .snippet-editor {
   @include card();
   margin: auto;
+  margin-top: 3rem;
   max-width: 1200px;
 
   .code {
     margin-bottom: 1rem;
+    max-height: 800px;
+    overflow: auto;
   }
 
   .btn-save,
@@ -28,6 +31,7 @@
 
 .btn-new {
   @include btn();
+  margin-top: 2rem;
   margin-right: 1rem;
   background: var(--primary-color);
   color: var(--text-light-color);

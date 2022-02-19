@@ -20,7 +20,7 @@ function Snippets() {
 
   const [modalOpen, setModalOpen] = useState(false);
 
-  const { user, getUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   // Notifications
   const defaultParams = {
@@ -135,72 +135,82 @@ function Snippets() {
 
   return (
     <div className="page-container">
-      {modalOpen && (
-        <Modal setOpenModal={setModalOpen} title="Edit Tags">
-          {editTags()}
-        </Modal>
-      )}
       {user && (
         <>
+          {modalOpen && (
+            <Modal setOpenModal={setModalOpen} title="Edit Tags">
+              {editTags()}
+            </Modal>
+          )}
+
+          {/* search section */}
           <div className="content">
             <div className="search-bar form">
-              <input
-                className="search-input"
-                type="text"
-                placeholder="Search snippet..."
-                value={searchKey}
-                onChange={(e) => setSearchKey(e.target.value)}
-              />
-            </div>
-            <div className="search-buttons">
-              <p>Search by: </p>
-              <button onClick={() => setSearchTerm("title")}>Title</button>
-
-              <button onClick={() => setSearchTerm("description")}>
-                Description
-              </button>
-
-              <button onClick={() => setSearchTerm("code")}>Code</button>
-            </div>
-            <button
-              className="openModalBtn"
-              onClick={() => {
-                setModalOpen(true);
-              }}
-            >
-              Edit Tags
-            </button>
-            <button
-              className="clear-search"
-              onClick={() => {
-                setSearchKey("");
-              }}
-            >
-              Clear search
-            </button>
-            <p>
-              View tag: <span>{filteredTag === "" ? "All" : filteredTag}</span>
-              {" / "}
-              Search by: <span>{searchTerm}</span>
-            </p>
-          </div>
-          <div className="snippets-container">
-            <NewSnippet getSnippets={getSnippets} />
-            <div className="divider">
-              <div className="snippets">
-                {snippets.length > 0
-                  ? renderSnippets()
-                  : user && (
-                      <p className="no-snippets">
-                        No snippets have been added yet!
-                      </p>
-                    )}
+              <div>
+                <input
+                  className="search-input"
+                  type="text"
+                  placeholder="Search snippet..."
+                  value={searchKey}
+                  onChange={(e) => setSearchKey(e.target.value)}
+                />
               </div>
-              <div className="tags-selector">
-                <ul>
-                  <p>Sort by tags</p>
-                  <hr />
+              <div className="search-buttons">
+                <div>
+                  <span>Search by:</span>{" "}
+                  <button onClick={() => setSearchTerm("title")}>Title</button>
+                  <button onClick={() => setSearchTerm("description")}>
+                    Description
+                  </button>
+                  <button onClick={() => setSearchTerm("code")}>Code</button>
+                  <p>
+                    View tag:{" "}
+                    <span>{filteredTag === "" ? "All" : filteredTag}</span>
+                    {" / "}
+                    Search by: <span>{searchTerm}</span>
+                  </p>
+                </div>
+                <div>
+                  <button
+                    className="clear-search"
+                    onClick={() => {
+                      setSearchKey("");
+                    }}
+                  >
+                    Clear search
+                  </button>
+                  <button
+                    className="openModalBtn"
+                    onClick={() => {
+                      setModalOpen(true);
+                    }}
+                  >
+                    Edit Tags
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
 
+          {/* Add New Snippet */}
+          <NewSnippet getSnippets={getSnippets} />
+
+          {/* snippets section */}
+          <div className="snippets-container">
+            <div className="snippets">
+              {snippets.length > 0
+                ? renderSnippets()
+                : user && (
+                    <p className="no-snippets">
+                      No snippets have been added yet!
+                    </p>
+                  )}
+            </div>
+            <div className="tags-selector">
+              <ul>
+                <p>Sort by tags</p>
+                <hr />
+                <div className="separator">
                   <li onClick={() => setFilteredTag("")}>
                     All tags
                     <hr />{" "}
@@ -227,8 +237,8 @@ function Snippets() {
                         </li>
                       );
                   })}
-                </ul>
-              </div>
+                </div>
+              </ul>
             </div>
           </div>
         </>

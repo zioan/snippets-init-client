@@ -17,9 +17,12 @@ body {
 .container {
   margin: 0 auto;
   padding: 1rem;
-  max-width: 90vw;
   min-height: 100vh;
-  // max-width: 1200px;
+  max-width: 1400px;
+
+  //for bottom footer
+  position: relative;
+  padding-bottom: 4rem;
 }
 
 //reset
@@ -62,7 +65,7 @@ textarea {
 
   label {
     margin-bottom: 0.5rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: bold;
   }
 
@@ -81,7 +84,7 @@ textarea {
 }
 
 .code-editor {
-  font-size: 1.2rem;
+  font-size: 1rem;
 
   background: #22222b;
   color: #569cd6;
