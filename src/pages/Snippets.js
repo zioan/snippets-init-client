@@ -150,7 +150,7 @@ function Snippets() {
                 <input
                   className="search-input"
                   type="text"
-                  placeholder="Search snippet..."
+                  placeholder="Enter a keywork to search snippets..."
                   value={searchKey}
                   onChange={(e) => setSearchKey(e.target.value)}
                 />
