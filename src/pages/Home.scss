@@ -78,6 +78,10 @@
       flex-direction: column-reverse;
       align-items: center;
       gap: 0;
+
+      .intro {
+        margin: 1rem;
+      }
     }
   }
 
@@ -92,12 +96,6 @@
     .form-action {
       margin-top: -30px;
       margin-bottom: 50px;
-    }
-
-    .home {
-      .intro {
-        margin-top: 0;
-      }
     }
 
     .code-img {
