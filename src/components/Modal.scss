@@ -45,3 +45,16 @@
   font-size: 25px;
   cursor: pointer;
 }
+
+@media screen and (max-width: 769px) {
+  .modalContainer {
+    width: 95%;
+
+    .title {
+      margin-bottom: 1rem;
+    }
+    .btn-close {
+      margin-top: 1rem;
+    }
+  }
+}

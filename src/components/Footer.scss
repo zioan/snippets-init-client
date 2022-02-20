@@ -12,3 +12,13 @@
     text-decoration: underline;
   }
 }
+
+@media screen and (max-width: 769px) {
+  .footer {
+    color: var(--primary-color);
+
+    a {
+      color: var(--primary-color);
+    }
+  }
+}

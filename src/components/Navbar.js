@@ -38,11 +38,11 @@ function Navbar() {
       <div>
         <>
           {user && (
-            <>
+            <div className="user-nav">
               {<p className="user">Welcome {username}</p>}
               {window.location.pathname !== "/snippets" && (
                 <button
-                  className="btn-logout"
+                  className="btn-snippets"
                   onClick={() => history.push("./snippets")}
                 >
                   Back to Snippets
@@ -52,7 +52,7 @@ function Navbar() {
               <button className="btn-logout" onClick={logOut}>
                 Log out
               </button>
-            </>
+            </div>
           )}
         </>
       </div>

@@ -192,3 +192,9 @@ textarea {
   //close x button
   display: none;
 }
+
+@media screen and (max-width: 769px) {
+  .container {
+    padding: 0;
+  }
+}

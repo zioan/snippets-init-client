@@ -21,4 +21,7 @@
   border-radius: 10px;
   background: var(--light-color);
   box-shadow: var(--box-shadow);
+  @media screen and (max-width: 769px) {
+    padding: 1rem;
+  }
 }

@@ -7,20 +7,53 @@
   justify-content: space-between;
   color: var(--text-light-color);
 
-  .btn-logout {
+  .btn-logout,
+  .btn-snippets {
     @include lnk();
   }
 
   a,
-  .btn-logout {
-    margin-right: 2rem;
+  .btn-logout,
+  .btn-snippets {
     color: unset;
+  }
+
+  .btn-snippets {
+    margin: 0 1rem;
   }
 
   .user {
     text-align: right;
-    display: inline-block;
+    // display: inline-block;
     margin-right: 2rem;
     cursor: default;
+  }
+
+  .user-nav {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .navbar {
+    padding: 1rem;
+    margin-bottom: 0;
+
+    h1 {
+      font-size: 1.5rem;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+    }
+
+    .user-nav {
+      margin-top: 2.5rem;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      // .btn-snippets {
+      //   margin: 0.5rem 0;
+      // }
+    }
   }
 }

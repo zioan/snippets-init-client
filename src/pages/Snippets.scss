@@ -145,6 +145,15 @@
   }
 }
 
+@media screen and (max-width: 769px) {
+  .page-container {
+    margin-top: 1rem;
+    .tags-editor {
+      padding: 0.5rem;
+    }
+  }
+}
+
 @media screen and (max-width: 600px) {
   .page-container {
     .content {
