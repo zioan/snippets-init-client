@@ -3,7 +3,7 @@
 .navbar {
   margin-bottom: 3rem;
   display: flex;
-  align-items: flex-end;
+  // align-items: flex-end;
   justify-content: space-between;
   color: var(--text-light-color);
 
@@ -24,7 +24,6 @@
 
   .user {
     text-align: right;
-    // display: inline-block;
     margin-right: 2rem;
     cursor: default;
   }
@@ -41,9 +40,6 @@
 
     h1 {
       font-size: 1.5rem;
-      position: fixed;
-      top: 15px;
-      left: 15px;
     }
 
     .user-nav {
