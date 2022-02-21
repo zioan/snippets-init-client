@@ -10,6 +10,7 @@ import "./Snippets.scss";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function Snippets() {
   const [snippets, setSnippets] = useState([]);
@@ -21,6 +22,7 @@ function Snippets() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const { user } = useContext(UserContext);
+  const history = useHistory();
 
   // Notifications
   const defaultParams = {
@@ -135,6 +137,14 @@ function Snippets() {
 
   return (
     <div className="page-container">
+      {!user && (
+        <h3>
+          You need to{" "}
+          <button className="login" onClick={() => history.push("./")}>
+            Log in
+          </button>{" "}
+        </h3>
+      )}
       {user && (
         <>
           {modalOpen && (
