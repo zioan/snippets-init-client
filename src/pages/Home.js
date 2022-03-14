@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 function Home() {
   const [userForm, setUserForm] = useState(true);
   const { user, getUser } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
 
   const history = useHistory();
 
@@ -22,11 +23,14 @@ function Home() {
 
     try {
       await axios.post(`${server}/api/users/login`, loginData);
+      setLoading(true);
     } catch (err) {
       if (err.response) {
         console.log(err.response);
       }
       return;
+    } finally {
+      setLoading(false);
     }
 
     await getUser();
@@ -52,6 +56,7 @@ function Home() {
       )}
       <div className="home">
         <div className="intro">
+          {loading && <div class="loader"></div>}
           <img className="code-img" src={codeImg} alt="code img" />
           <p className="dropcaps">
             Snippets Manager is a web application that allows managing and
